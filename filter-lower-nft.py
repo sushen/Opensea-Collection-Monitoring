@@ -33,24 +33,15 @@ chrome_options.add_argument(f"user-data-dir={scriptDirectory}\\userdata")
 buying_limits = 10
 
 # TODO: You need to put your NFT link here
-NFT_link = "https://opensea.io/assets"
+NFT_link = "https://opensea.io/activity?search[collections][0]=clonex&search[collections][1]=boredapeyachtclub&search[collections][2]=dinobabies&search[collections][3]=coolmans-universe&search[eventTypes][0]=AUCTION_CREATED"
 
 # This is for Single Buy Button
-buy_xpath = "//button[normalize-space()='Buy Now']"
-# buy_xpath = "/html[1]/body[1]/div[1]/div[3]/div[1]/div[4]/div[1]/div[1]/div[1]/div[3]/div[1]/button[1]"
-
-# Experiment With Others
-# buy_xpath = "//button[normalize-space()='Buy']"
-# buy_xpath = "(//button[@type='button'][normalize-space()='View Bids'])"
-# buy_xpath = "/html[1]/body[1]/div[1]/div[3]/div[1]/div[4]/div[1]/div[1]/div[1]/div[3]/div[1]/button[1]"
-
-# This is for Multiple Buy Button
-# buy_xpath = "(//button[@type='button'][normalize-space()='Buy Now'])"
-# NFT_Number = 1
+buy_xpath = "//button[normalize-sppace()='Buy Now']"
 
 driver = webdriver.Chrome(r"../opensea/chromedriver.exe", chrome_options=chrome_options)
-
 
 # print(input(" Connect your waller address :"))
 driver.implicitly_wait(10)
 driver.get(NFT_link)
+
+# TODO: Filter
