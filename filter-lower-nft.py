@@ -44,4 +44,12 @@ driver = webdriver.Chrome(r"../opensea/chromedriver.exe", chrome_options=chrome_
 driver.implicitly_wait(10)
 driver.get(NFT_link)
 
-# TODO: Filter
+# TODO: Filter Price
+
+# TODO: Find Single NFT
+
+# TODO: Buy NFT
+
+# TODO: Repeat Process
+
+
