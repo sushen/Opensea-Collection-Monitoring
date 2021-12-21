@@ -7,6 +7,8 @@ from selenium import webdriver
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
+
 import pathlib
 import random
 
@@ -30,6 +32,9 @@ chrome_options.add_argument("disable-infobars")
 chrome_options.add_experimental_option("useAutomationExtension", False)
 chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"])
 chrome_options.add_argument("user-data-dir=chrome-data")
+
+# for windows uncomment below line
+
 # chrome_options.add_argument(f"user-data-dir={scriptDirectory}\\userdata")
 
 # TODO: How much you want to buy
@@ -40,14 +45,14 @@ NFT_link = "https://opensea.io/activity?search[collections][0]=clonex&search[col
 
 # This is for Single Buy Button
 buy_xpath = "//button[normalize-sppace()='Buy Now']"
-# System.setProperty("webdriver.chrome.driver","/chromedriver");
 
 
-# driver.get("https://mvnrepository.com");
-
-from selenium.webdriver.common.by import By
 
 
+#windows setup
+# driver = webdriver.Chrome(r"../opensea/chromedriver.exe", chrome_options=chrome_options)
+
+# linx setup
 driver = webdriver.Chrome(r"./chromedriver", chrome_options=chrome_options)
 
 # print(input(" Connect your waller address :"))
