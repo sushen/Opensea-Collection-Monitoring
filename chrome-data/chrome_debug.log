@@ -1,0 +1,4 @@
+[51168:51168:1221/153140.382574:ERROR:sandbox_linux.cc(374)] InitializeSandbox() called with multiple threads in process gpu-process.
+[51123:51123:1221/153150.361285:INFO:CONSOLE(1)] "@metamask/detect-provider: Unable to detect window.ethereum.", source: https://opensea.io/_next/static/chunks/9def9266aa048a2730359cc33bf95932fa7f2239.9ffd6419168684c192f0.js (1)
+[51123:51123:1221/153202.003128:INFO:CONSOLE(1)] "@metamask/detect-provider: Unable to detect window.ethereum.", source: https://opensea.io/_next/static/chunks/9def9266aa048a2730359cc33bf95932fa7f2239.9ffd6419168684c192f0.js (1)
+[51123:51123:1221/153211.545702:WARNING:pref_notifier_impl.cc(40)] Pref observer for media_router.cast_allow_all_ips found at shutdown.
