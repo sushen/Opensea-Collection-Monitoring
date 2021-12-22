@@ -44,9 +44,13 @@ driver = webdriver.Chrome(r"../opensea/chromedriver.exe", chrome_options=chrome_
 
 # print(input(" Connect your waller address :"))
 driver.implicitly_wait(10)
-driver.get(NFT_link)
+
+driver.get("https://opensea.io/account")
+
+print(input("Connect wallet press enter :"))
 
 # TODO: Filter Price
+driver.get(NFT_link)
 
 # Setting paths and variables
 
@@ -80,16 +84,21 @@ price_stripped = re.sub("[^0-9]", "", separated_price)
 time_stripped = re.sub("[^0-9]", "", time_text)
 
 # Check if optimal conditions are met or not
-print(f"\ntime: {time_stripped}, price: {price_stripped}")
-if float(price_stripped) < expected_price and int(time_stripped) < expected_time:
-    nft_click[-1].click()
-    print('Matched!')
-    buy_button = driver.find_element_by_xpath(buy_button_path)
-    if buy_button:
-        buy_button.click()
-        print('Button clicked!')
 
 
+for i in range(10):
+    print(i)
+    driver.implicitly_wait(11)
+    time.sleep(8)
+    driver.get(NFT_link)
+    print(f"\ntime: {time_stripped}, price: {price_stripped}")
+    if float(price_stripped) < expected_price and int(time_stripped) < expected_time:
+        nft_click[-1].click()
+        print('Matched!')
+        buy_button = driver.find_element_by_xpath(buy_button_path)
+        if buy_button:
+            buy_button.click()
+            print('Button clicked!')
 
-else:
-    print("\nPrice or Time is greater than expectation, Trying again...")
+    else:
+        print("\nPrice or Time is greater than expectation, Trying again...")
