@@ -35,7 +35,7 @@ chrome_options.add_argument("user-data-dir=chrome-data")
 
 # for windows uncomment below line
 
-# chrome_options.add_argument(f"user-data-dir={scriptDirectory}\\userdata")
+chrome_options.add_argument(f"user-data-dir={scriptDirectory}\\userdata")
 
 # TODO: How much you want to buy
 buying_limits = 10
