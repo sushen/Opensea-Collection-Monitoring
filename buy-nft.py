@@ -37,19 +37,27 @@ NFT_link = "https://opensea.io/activity?search[collections][0]=clonex&search[col
            "1]=boredapeyachtclub&search[collections][2]=dinobabies&search[collections][3]=coolmans-universe&search[" \
            "eventTypes][0]=AUCTION_CREATED "
 
+login_link = "https://opensea.io/login?referrer=%2Faccount"
+
 # This is for Single Buy Button
 buy_xpath = "//button[normalize-sppace()='Buy Now']"
 
 driver = webdriver.Chrome(r"../opensea/chromedriver.exe", chrome_options=chrome_options)
 
-# print(input(" Connect your waller address :"))
+# User must log in before running code
+driver.implicitly_wait(10)
+driver.get(login_link)
+
+print(input("Connect wallet, then hit enter >>>>>> "))
+
 driver.implicitly_wait(10)
 driver.get(NFT_link)
 
 # TODO: Filter Price
 
-# Setting paths and variables
+# paths variables
 
+accept_xpath = "//input[@id='tos']"
 time_xpath = "//div[@data-testid='EventTimestamp']"
 nft_names_xpath = "//div[@role='listitem']//child::div[@class='AssetCell--container']"
 nft_price_xpath = "//div[@class='Overflowreact__OverflowContainer-sc-10mm0lu-0 gjwKJf Price--fiat-amount']"
@@ -88,6 +96,9 @@ if float(price_stripped) < expected_price and int(time_stripped) < expected_time
     if buy_button:
         buy_button.click()
         print('Button clicked!')
+        accept_input = driver.find_element_by_xpath(accept_xpath)
+        accept_input.click()
+        print("Terms accepted")
 
 
 
