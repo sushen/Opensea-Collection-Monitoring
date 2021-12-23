@@ -53,10 +53,7 @@ print(input("Connect wallet, then hit enter >>>>>> "))
 driver.implicitly_wait(10)
 driver.get(NFT_link)
 
-# TODO: Filter Price
-
 # paths variables
-
 accept_xpath = "//input[@id='tos']"
 time_xpath = "//div[@data-testid='EventTimestamp']"
 nft_names_xpath = "//div[@role='listitem']//child::div[@class='AssetCell--container']"
@@ -67,40 +64,43 @@ buy_button_path = "//button[contains(text(),'Buy now')]"
 expected_price = 30000
 expected_time = 59
 
-nft_names = driver.find_elements_by_xpath(nft_names_xpath)
-time_elements = driver.find_elements_by_xpath(time_xpath)
-nft_prices = driver.find_elements_by_xpath(nft_price_xpath)
-nft_click = driver.find_elements_by_xpath(nft_click_xpath)
+for i in range(100):
+    #driver.refresh()
+    driver.get(NFT_link)
+    driver.implicitly_wait(10)
+    time.sleep(.1)
+    nft_names = driver.find_elements_by_xpath(nft_names_xpath)
+    time_elements = driver.find_elements_by_xpath(time_xpath)
+    nft_prices = driver.find_elements_by_xpath(nft_price_xpath)
+    nft_click = driver.find_elements_by_xpath(nft_click_xpath)
 
-# TODO: Find Single NFT
+    # Getting first nft and it's details
+    nft_name = nft_names[-1].text
+    time_text = time_elements[-1].text
+    nft_price = nft_prices[-1].text
 
-# Getting first nft and it's details
-nft_name = nft_names[-1].text
-time_text = time_elements[-1].text
-nft_price = nft_prices[-1].text
+    # Ignore all numbers after . because it causes error
+    separator = '.'
+    separated_price = nft_price.split(separator, 1)[0]
 
-# Ignore all numbers after . because it causes error
-separator = '.'
-separated_price = nft_price.split(separator, 1)[0]
+    # Remove special characters from price and time variable
+    price_stripped = re.sub("[^0-9]", "", separated_price)
+    time_stripped = re.sub("[^0-9]", "", time_text)
 
-# Remove special characters from price and time variable
-price_stripped = re.sub("[^0-9]", "", separated_price)
-time_stripped = re.sub("[^0-9]", "", time_text)
+    print(f"\ntime: {time_stripped}, price: {price_stripped}")
 
-# Check if optimal conditions are met or not
-print(f"\ntime: {time_stripped}, price: {price_stripped}")
-if float(price_stripped) < expected_price and int(time_stripped) < expected_time:
-    nft_click[-1].click()
-    print('Matched!')
-    buy_button = driver.find_element_by_xpath(buy_button_path)
-    if buy_button:
-        buy_button.click()
-        print('Button clicked!')
-        accept_input = driver.find_element_by_xpath(accept_xpath)
-        accept_input.click()
-        print("Terms accepted")
+    if float(price_stripped) < expected_price and int(time_stripped) < expected_time:
+        nft_click[-1].click()
+        print('Matched!')
+        buy_button = driver.find_element_by_xpath(buy_button_path)
+        if buy_button:
+            buy_button.click()
+            print('Button clicked!')
+            accept_input = driver.find_element_by_xpath(accept_xpath)
+            accept_input.click()
+            print("Terms accepted")
+            time.sleep(1)
 
-
-
-else:
-    print("\nPrice or Time is greater than expectation, Trying again...")
+    else:
+        print("\nPrice or Time is greater than expectation, Trying again...")
+        time.sleep(5)
