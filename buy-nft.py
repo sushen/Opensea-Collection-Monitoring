@@ -37,23 +37,26 @@ NFT_link = "https://opensea.io/activity?search[collections][0]=clonex&search[col
            "1]=boredapeyachtclub&search[collections][2]=dinobabies&search[collections][3]=coolmans-universe&search[" \
            "eventTypes][0]=AUCTION_CREATED "
 
+login_link = "https://opensea.io/login?referrer=%2Faccount"
+
 # This is for Single Buy Button
 buy_xpath = "//button[normalize-sppace()='Buy Now']"
 
 driver = webdriver.Chrome(r"../opensea/chromedriver.exe", chrome_options=chrome_options)
 
-# print(input(" Connect your waller address :"))
+# User must log in before running code
 driver.implicitly_wait(10)
 
-driver.get("https://opensea.io/account")
+driver.get(login_link)
 
-print(input("Connect wallet press enter :"))
+print(input("Connect wallet, then hit enter >>>>>> "))
 
-# TODO: Filter Price
+
+driver.implicitly_wait(10)
 driver.get(NFT_link)
 
-# Setting paths and variables
-
+# paths variables
+accept_xpath = "//input[@id='tos']"
 time_xpath = "//div[@data-testid='EventTimestamp']"
 nft_names_xpath = "//div[@role='listitem']//child::div[@class='AssetCell--container']"
 nft_price_xpath = "//div[@class='Overflowreact__OverflowContainer-sc-10mm0lu-0 gjwKJf Price--fiat-amount']"
@@ -63,35 +66,34 @@ buy_button_path = "//button[contains(text(),'Buy now')]"
 expected_price = 30000
 expected_time = 59
 
-nft_names = driver.find_elements_by_xpath(nft_names_xpath)
-time_elements = driver.find_elements_by_xpath(time_xpath)
-nft_prices = driver.find_elements_by_xpath(nft_price_xpath)
-nft_click = driver.find_elements_by_xpath(nft_click_xpath)
 
-# TODO: Find Single NFT
-
-# Getting first nft and it's details
-nft_name = nft_names[-1].text
-time_text = time_elements[-1].text
-nft_price = nft_prices[-1].text
-
-# Ignore all numbers after . because it causes error
-separator = '.'
-separated_price = nft_price.split(separator, 1)[0]
-
-# Remove special characters from price and time variable
-price_stripped = re.sub("[^0-9]", "", separated_price)
-time_stripped = re.sub("[^0-9]", "", time_text)
-
-# Check if optimal conditions are met or not
-
-
-for i in range(10):
-    print(i)
-    driver.implicitly_wait(11)
-    time.sleep(8)
+for i in range(100):
+    #driver.refresh()
     driver.get(NFT_link)
+    driver.implicitly_wait(10)
+    time.sleep(.1)
+    nft_names = driver.find_elements_by_xpath(nft_names_xpath)
+    time_elements = driver.find_elements_by_xpath(time_xpath)
+    nft_prices = driver.find_elements_by_xpath(nft_price_xpath)
+    nft_click = driver.find_elements_by_xpath(nft_click_xpath)
+
+    # Getting first nft and it's details
+    nft_name = nft_names[-1].text
+    time_text = time_elements[-1].text
+    nft_price = nft_prices[-1].text
+
+    # Ignore all numbers after . because it causes error
+    separator = '.'
+    separated_price = nft_price.split(separator, 1)[0]
+
+    # Remove special characters from price and time variable
+    price_stripped = re.sub("[^0-9]", "", separated_price)
+    time_stripped = re.sub("[^0-9]", "", time_text)
+
     print(f"\ntime: {time_stripped}, price: {price_stripped}")
+
+
+
     if float(price_stripped) < expected_price and int(time_stripped) < expected_time:
         nft_click[-1].click()
         print('Matched!')
@@ -100,5 +102,12 @@ for i in range(10):
             buy_button.click()
             print('Button clicked!')
 
+            accept_input = driver.find_element_by_xpath(accept_xpath)
+            accept_input.click()
+            print("Terms accepted")
+            time.sleep(1)
+
     else:
         print("\nPrice or Time is greater than expectation, Trying again...")
+        time.sleep(5)
+
