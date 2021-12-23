@@ -51,7 +51,6 @@ driver.get(login_link)
 
 print(input("Connect wallet, then hit enter >>>>>> "))
 
-
 driver.implicitly_wait(10)
 driver.get(NFT_link)
 
@@ -63,12 +62,11 @@ nft_price_xpath = "//div[@class='Overflowreact__OverflowContainer-sc-10mm0lu-0 g
 nft_click_xpath = "//a[@class='styles__StyledLink-sc-l6elh8-0 ekTmzq styles__CoverLink-sc-nz4knd-1 givILt']"
 buy_button_path = "//button[contains(text(),'Buy now')]"
 
-expected_price = 30000
+expected_price = 300000
 expected_time = 59
 
-
 for i in range(100):
-    #driver.refresh()
+    # driver.refresh()
     driver.get(NFT_link)
     driver.implicitly_wait(10)
     time.sleep(.1)
@@ -92,8 +90,6 @@ for i in range(100):
 
     print(f"\ntime: {time_stripped}, price: {price_stripped}")
 
-
-
     if float(price_stripped) < expected_price and int(time_stripped) < expected_time:
         nft_click[-1].click()
         print('Matched!')
@@ -107,7 +103,9 @@ for i in range(100):
             print("Terms accepted")
             time.sleep(1)
 
+    # TODO : Create a elif to handle reload
     else:
         print("\nPrice or Time is greater than expectation, Trying again...")
         time.sleep(5)
 
+# TODO : Compare floorprice to price and Make buy when floor price is lover than original price
