@@ -1,0 +1,3 @@
+pytest Tests/test_HomePage.py
+pytest Tests/test_ActivityPage.py
+python -m pytest
