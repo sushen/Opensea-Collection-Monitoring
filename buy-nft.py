@@ -45,11 +45,11 @@ buy_xpath = "//button[normalize-sppace()='Buy Now']"
 driver = webdriver.Chrome(r"../opensea/chromedriver.exe", chrome_options=chrome_options)
 
 # User must log in before running code
-driver.implicitly_wait(10)
+# driver.implicitly_wait(10)
 
-driver.get(login_link)
+# driver.get(login_link)
 
-print(input("Connect wallet, then hit enter >>>>>> "))
+# print(input("Connect wallet, then hit enter >>>>>> "))
 
 driver.implicitly_wait(10)
 driver.get(NFT_link)
@@ -61,6 +61,8 @@ nft_names_xpath = "//div[@role='listitem']//child::div[@class='AssetCell--contai
 nft_price_xpath = "//div[@class='Overflowreact__OverflowContainer-sc-10mm0lu-0 gjwKJf Price--fiat-amount']"
 nft_click_xpath = "//a[@class='styles__StyledLink-sc-l6elh8-0 ekTmzq styles__CoverLink-sc-nz4knd-1 givILt']"
 buy_button_path = "//button[contains(text(),'Buy now')]"
+# floor_price_xpath = "//div[@data-token-id='8140']//child::a[@class='chakra-link css-166ifkv'])"
+nft_eth_price_xpath = "//div[@class='Overflowreact__OverflowContainer-sc-10mm0lu-0 gjwKJf Price--amount']"
 
 expected_price = 300000
 expected_time = 59
@@ -71,26 +73,39 @@ for i in range(100):
     driver.implicitly_wait(10)
     time.sleep(.1)
     nft_names = driver.find_elements_by_xpath(nft_names_xpath)
-    time_elements = driver.find_elements_by_xpath(time_xpath)
-    nft_prices = driver.find_elements_by_xpath(nft_price_xpath)
+    # time_elements = driver.find_elements_by_xpath(time_xpath)
+    # nft_prices = driver.find_elements_by_xpath(nft_price_xpath)
     nft_click = driver.find_elements_by_xpath(nft_click_xpath)
+
+    nft_eth_prices = driver.find_elements_by_xpath(nft_eth_price_xpath)
 
     # Getting first nft and it's details
     nft_name = nft_names[-1].text
-    time_text = time_elements[-1].text
-    nft_price = nft_prices[-1].text
+    # time_text = time_elements[-1].text
+    # nft_price = nft_prices[-1].text
+
+    nft_eth_price = nft_eth_prices[-1].text
 
     # Ignore all numbers after . because it causes error
     separator = '.'
-    separated_price = nft_price.split(separator, 1)[0]
+    # separated_price = nft_price.split(separator, 1)[0]
 
     # Remove special characters from price and time variable
-    price_stripped = re.sub("[^0-9]", "", separated_price)
-    time_stripped = re.sub("[^0-9]", "", time_text)
+    # price_stripped = re.sub("[^0-9]", "", separated_price)
+    # time_stripped = re.sub("[^0-9]", "", time_text)
+    # //div[@class='SuperSea__AssetInfo SuperSea__AssetInfo--list']//child::a[@class='chakra-link css-166ifkv']
 
-    print(f"\ntime: {time_stripped}, price: {price_stripped}")
+    driver.implicitly_wait(10)
+    time.sleep(4)
+    nft_token = re.sub("[^0-9]", "", nft_name)
+    nft_floor_price_xpath = f"//div[@data-token-id='{nft_token}']//child::a[@class='chakra-link css-166ifkv']"
+    nft_floor_price = driver.find_element_by_xpath(nft_floor_price_xpath).text
 
-    if float(price_stripped) < expected_price and int(time_stripped) < expected_time:
+    print(f"NFT name is: -- {nft_name}\n"
+          f"NFT current price is: -- {nft_eth_price}\n"
+          f"NFT floor price is: -- {nft_floor_price}\n")
+
+    if float(nft_floor_price) > float(nft_eth_price):
         nft_click[-1].click()
         print('Matched!')
         buy_button = driver.find_element_by_xpath(buy_button_path)
@@ -100,12 +115,14 @@ for i in range(100):
 
             accept_input = driver.find_element_by_xpath(accept_xpath)
             accept_input.click()
+            print(input('>>>>>>> '))
             print("Terms accepted")
-            time.sleep(1)
+            time.sleep(4)
 
-    # TODO : Create a elif to handle reload
     else:
         print("\nPrice or Time is greater than expectation, Trying again...")
-        time.sleep(5)
+        time.sleep(6)
 
-# TODO : Compare floorprice to price and Make buy when floor price is lover than original price
+# TODO : Compare floor price to price and Make buy when floor price is lover than original price
+
+# TODO : Install extension
