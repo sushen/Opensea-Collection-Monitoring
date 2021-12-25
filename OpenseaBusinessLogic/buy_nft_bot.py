@@ -3,6 +3,7 @@ from Bots.bot_ActivityPage import BotActivityPage
 
 acclivity = BotActivityPage()
 acclivity.driver.get("https://opensea.io/")
+acclivity.test_home_title()
 
 # TODO : Login Using Meta Mask and Stop Script
 
