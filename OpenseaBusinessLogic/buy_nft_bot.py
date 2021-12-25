@@ -5,7 +5,9 @@ acclivity = BotActivityPage()
 acclivity.driver.get("https://opensea.io/")
 
 # TODO : Login Using Meta Mask and Stop Script
+
 print(input("Connect Wallet :"))
+
 # TODO : Find NFT Name
 
 # TODO : Find NFT Price
