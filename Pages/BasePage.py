@@ -7,7 +7,7 @@ from selenium.webdriver.common.keys import Keys
 """ This Class is the parents of all page class """
 """ This Class contains all the generic method and utilities """
 
-wait_time = 11
+wait_time = 30
 
 
 class BasePage:
