@@ -8,5 +8,3 @@ class TestHomePage(BaseTest):
         self.homepage = HomePage(self.driver)
         title = self.homepage.get_title(TestData.LOGIN_PAGE_TITLE)
         assert title == TestData.LOGIN_PAGE_TITLE
-
-
