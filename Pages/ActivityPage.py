@@ -10,13 +10,20 @@ class ActivityPage(BasePage):
                    "eventTypes][0]=AUCTION_CREATED "
     ACTIVITY_TITLE = "Activity | OpenSea"
 
-    NFT_NAMES = (By.XPATH, "//div[@role='listitem']//child::div[@class='AssetCell--container']")
+    # NFT_NAMES = (By.XPATH, "//div[@role='listitem']//child::div[@class='AssetCell--container']")
+    # NFT_NAMES = (By.XPATH, "(//div[@class = 'AssetCell--container'])[1]")
+    NFT_NAMES = (By.XPATH, "//a[@href='/explore-collections']")
 
     NFT_PRICES = (By.XPATH, "/div[@class='Overflowreact__OverflowContainer-sc-10mm0lu-0 gjwKJf Price--fiat-amount']")
 
     def __init__(self, driver):
         super().__init__(driver)
         self.driver.get(self.ACTIVITY_URL)
+
+    """ constructor of the page class """
+    # def __init__(self, driver):
+    #     super().__init__(driver)
+    #     self.driver.get(TestData.BASE_URL)
 
     def get_first_nft_name(self, NFT_NAMES):
         self.get_element_text(NFT_NAMES)

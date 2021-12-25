@@ -1,4 +1,8 @@
 # TODO : Go to Base Website - https://opensea.io/
+from Bots.bot_ActivityPage import BotActivityPage
+
+acclivity = BotActivityPage()
+acclivity.driver.get("https://opensea.io/")
 
 # TODO : Login Using Meta Mask and Stop Script
 
