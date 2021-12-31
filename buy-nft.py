@@ -61,7 +61,7 @@ nft_names_xpath = "//div[@role='listitem']//child::div[@class='AssetCell--contai
 nft_price_xpath = "//div[@class='Overflowreact__OverflowContainer-sc-10mm0lu-0 gjwKJf Price--fiat-amount']"
 nft_click_xpath = "//a[@class='styles__StyledLink-sc-l6elh8-0 ekTmzq styles__CoverLink-sc-nz4knd-1 givILt']"
 buy_button_path = "//button[contains(text(),'Buy now')]"
-# floor_price_xpath = "//div[@data-token-id='8140']//child::a[@class='chakra-link css-166ifkv'])"
+floor_prices_xpath = "//a[@class='chakra-link css-166ifkv']"
 nft_eth_price_xpath = "//div[@class='Overflowreact__OverflowContainer-sc-10mm0lu-0 gjwKJf Price--amount']"
 
 expected_price = 300000

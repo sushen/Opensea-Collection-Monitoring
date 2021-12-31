@@ -2,7 +2,6 @@ import pathlib
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
-
 chrome_options = Options()
 scriptDirectory = pathlib.Path().absolute()
 chrome_options.add_argument("--start-maximized")
