@@ -4,6 +4,7 @@ from selenium.webdriver import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
+
 """ This Class is the parents of all page class """
 """ This Class contains all the generic method and utilities """
 
@@ -62,7 +63,3 @@ class BasePage:
         time.sleep(4)
         scroll_actions = ActionChains(self.driver)
         scroll_actions.send_keys(Keys.PAGE_UP).perform()
-
-
-
-

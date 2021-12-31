@@ -1,3 +1,4 @@
 pytest Tests/test_HomePage.py
 pytest Tests/test_ActivityPage.py
+pytest Tests/test_BuyPage.py
 python -m pytest
