@@ -12,6 +12,8 @@ ACTIVITY_URL = "https://opensea.io/activity?search[collections][0]=clonex&search
                "1]=boredapeyachtclub&search[collections][2]=dinobabies&search[collections][3]=coolmans-universe&search[" \
                "eventTypes][0]=AUCTION_CREATED "
 
+buy_button = "//button[contains(text(),'Buy now')]"
+
 
 buy_page = BotBuyPage()
 
@@ -37,14 +39,28 @@ for i in range(1000):
     print(f"NFT name : {nft_name} \n"
           f"NFT price in eth : {nft_eth_price} \n"
           f"NFT floor price : {nft_floor_price} \n")
-if float(nft_floor_price) > float(nft_eth_price):
-    nft_click = buy_page.driver.find_elements_by_xpath(nft_click_xpath)
-    nft_click[-1].click()
-    # buy_page.test_buy_button()
-    # TODO : Start The repeat loop and Continue...
-    print(input("loading nft : "))
 
-else:
-    print(input("Nft Price is Big : "))
+    if float(nft_floor_price) > float(nft_eth_price):
+        nft_click = buy_page.driver.find_elements_by_xpath(nft_click_xpath)
+        nft_click[-1].click()
+        # buy_page.test_buy_button()
+        # TODO : Start The repeat loop and Continue...
+        print(input("loading nft : "))
+
+        buy_page.driver.find_element_by_xpath(buy_button).click()
+
+        print(input("loading nft : "))
+
+    else:
+        print(input("Nft Price is Big : "))
+        nft_click = buy_page.driver.find_elements_by_xpath(nft_click_xpath)
+        nft_click[-1].click()
+        # buy_page.test_buy_button()
+        # TODO : Start The repeat loop and Continue...
+        print(input("loading nft : "))
+
+        buy_page.driver.find_element_by_xpath(buy_button).click()
+
+        print(input("loading nft : "))
 
 
