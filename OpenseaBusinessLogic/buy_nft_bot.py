@@ -17,12 +17,13 @@ buy_page = BotBuyPage()
 
 
 buy_page.driver.get("https://opensea.io/")
-print(input("Please connect your metamask then hit enter >>>>> "))
+print(input("Connect metamask:"))
 
 for i in range(1000):
     buy_page.driver.get(ACTIVITY_URL)
     buy_page.driver.implicitly_wait(10)
-    print(input("Wating to load nft, this will be excluded later >>>> "))
+    time.sleep(4)
+    # print(input("Wating to load nft, this will be excluded later >>>> "))
 
     nft_names = buy_page.driver.find_elements_by_xpath(nft_names_xpath)
     nft_name = nft_names[-1].text
@@ -36,10 +37,14 @@ for i in range(1000):
     print(f"NFT name : {nft_name} \n"
           f"NFT price in eth : {nft_eth_price} \n"
           f"NFT floor price : {nft_floor_price} \n")
+if float(nft_floor_price) > float(nft_eth_price):
+    nft_click = buy_page.driver.find_elements_by_xpath(nft_click_xpath)
+    nft_click[-1].click()
+    # buy_page.test_buy_button()
+    # TODO : Start The repeat loop and Continue...
+    print(input("loading nft : "))
 
-    if float(nft_floor_price) > float(nft_eth_price):
-        nft_click = buy_page.driver.find_elements_by_xpath(nft_click_xpath)
-        nft_click[-1].click()
-        buy_page.test_buy_button()
+else:
+    print(input("Nft Price is Big : "))
 
-# TODO : Start The repeat loop and Continue...
+
