@@ -44,18 +44,18 @@ print(input("Connect Metamask  :"))
 
 buy_button = "//button[contains(text(),'Buy now')]"
 driver.find_element_by_xpath(buy_button).click()
-print(input("GO for Unreview :"))
+# print(input("GO for Unreview :"))
 
 driver.implicitly_wait(10)
 
 unreview_nft = "//input[@id='review-confirmation']"
 driver.find_element_by_xpath(unreview_nft).click()
-print(input("GO for Tos :"))
+# print(input("GO for Tos :"))
 
 driver.implicitly_wait(10)
 tos = "//input[@id='tos']"
 driver.find_element_by_xpath(tos).click()
-print(input("Go For Conform checkout :"))
+# print(input("Go For Conform checkout :"))
 
 driver.implicitly_wait(10)
 conform_checkout = "//button[.='Confirm checkout']"
@@ -77,12 +77,31 @@ print(window_after)
 print(".......................")
 print(driver.title)
 
+print(input("Go for edit balance : "))
 edit_transaction = "//button[.='Edit']"
 driver.find_element_by_xpath(edit_transaction).click()
 
 driver.implicitly_wait(10)
 time.sleep(4)
 
-advanced_options = "//button[.='Advanced Options']"
+print(input("Go for advanced option : "))
+advanced_options = '//button[@class="edit-gas-display__advanced-button"]'
 driver.find_element_by_xpath(advanced_options).click()
+
+
+print(input("Send gas limit : "))
+# gas_limit_numeric_input = '//div[@class="numeric-input"]'
+gas_limit_numeric_input = "//h6[contains(text(),'Gas Limit')]/ancestor::div[@class='form-field']//input[@class='numeric-input']"
+
+driver.find_element_by_xpath(gas_limit_numeric_input).click()
+print(driver.find_element_by_xpath(gas_limit_numeric_input).text)
+print(driver.find_element_by_xpath(gas_limit_numeric_input))
+driver.find_element_by_xpath(gas_limit_numeric_input).send_keys("30000")
+
+
+
+
+
+
+
 
