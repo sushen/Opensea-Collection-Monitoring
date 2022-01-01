@@ -69,7 +69,7 @@ print(window_before)
 
 
 driver.implicitly_wait(10)
-time.sleep(4)
+time.sleep(.5)
 window_after = driver.window_handles[1]
 # driver.switch_to_window(window_after)
 driver.switch_to.window(window_after)
@@ -90,13 +90,23 @@ driver.find_element_by_xpath(advanced_options).click()
 
 
 print(input("Send gas limit : "))
-# gas_limit_numeric_input = '//div[@class="numeric-input"]'
-gas_limit_numeric_input = "//h6[contains(text(),'Gas Limit')]/ancestor::div[@class='form-field']//input[@class='numeric-input']"
+gas_limit_numeric_input = '//div[@class="numeric-input"]'
+gas_limit_numeric_input_elements = driver.find_elements_by_xpath(gas_limit_numeric_input)
+print(gas_limit_numeric_input_elements)
+print(len(gas_limit_numeric_input_elements))
+print(gas_limit_numeric_input_elements[0])
+gas_limit_numeric_input_elements[0].click()
 
-driver.find_element_by_xpath(gas_limit_numeric_input).click()
-print(driver.find_element_by_xpath(gas_limit_numeric_input).text)
-print(driver.find_element_by_xpath(gas_limit_numeric_input))
-driver.find_element_by_xpath(gas_limit_numeric_input).send_keys("30000")
+print(input("Send gas limit : "))
+# gas_limit_numeric_input_elements[0].send_keys("30000")
+
+
+# gas_limit_numeric_input = '//div[@class="numeric-input"]'
+# gas_limit_numeric_input = "//h6[contains(text(),'Gas Limit')]//ancestor::div[@class='form-field']//input[@class='numeric-input']"
+
+# driver.find_element_by_xpath(gas_limit_numeric_input).click()
+# print(driver.find_element_by_xpath(gas_limit_numeric_input).text)
+# driver.find_element_by_xpath(gas_limit_numeric_input).send_keys("30000")
 
 
 
