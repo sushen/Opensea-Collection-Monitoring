@@ -77,5 +77,12 @@ print(window_after)
 print(".......................")
 print(driver.title)
 
+edit_transaction = "//button[.='Edit']"
+driver.find_element_by_xpath(edit_transaction).click()
 
+driver.implicitly_wait(10)
+time.sleep(4)
+
+advanced_options = "//button[.='Advanced Options']"
+driver.find_element_by_xpath(advanced_options).click()
 
