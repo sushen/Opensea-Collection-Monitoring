@@ -9,6 +9,7 @@ from selenium.webdriver.common.keys import Keys
 import pathlib
 import re
 import random
+from selenium.webdriver.common.action_chains import ActionChains
 
 chrome_options = Options()
 scriptDirectory = pathlib.Path().absolute()
@@ -98,6 +99,12 @@ print(gas_limit_numeric_input_elements[0])
 gas_limit_numeric_input_elements[0].click()
 
 print(input("Send gas limit : "))
+
+action = ActionChains(driver)
+
+action.send_keys('30000')
+action.perform()
+
 # gas_limit_numeric_input_elements[0].send_keys("30000")
 
 
