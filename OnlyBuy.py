@@ -90,7 +90,7 @@ advanced_options = '//button[@class="edit-gas-display__advanced-button"]'
 driver.find_element_by_xpath(advanced_options).click()
 
 
-print(input("Send gas limit : "))
+print(input("Start form handling : "))
 gas_limit_numeric_input = '//div[@class="numeric-input"]'
 gas_limit_numeric_input_elements = driver.find_elements_by_xpath(gas_limit_numeric_input)
 print(gas_limit_numeric_input_elements)
@@ -102,8 +102,35 @@ print(input("Send gas limit : "))
 
 action = ActionChains(driver)
 
-action.send_keys('30000')
-action.perform()
+action.key_down(Keys.CONTROL).send_keys("a").key_up(Keys.CONTROL)\
+    .send_keys(Keys.BACK_SPACE).send_keys(30000).perform()
+
+gas_limit_numeric_input_elements[1].click()
+
+print(input("Send Max priority fee : "))
+action.key_down(Keys.CONTROL).send_keys("a").key_up(Keys.CONTROL)\
+    .send_keys(Keys.BACK_SPACE).send_keys(2).perform()
+
+gas_limit_numeric_input_elements[2].click()
+
+print(input("Send max fee : "))
+
+action.key_down(Keys.CONTROL).send_keys("a").key_up(Keys.CONTROL)\
+    .send_keys(Keys.BACK_SPACE).send_keys(100).perform()
+
+
+print(input("Save and Reject :D  : "))
+save_btn = "//button[normalize-space()='Save']"
+driver.find_element_by_xpath(save_btn).click()
+time.sleep(1)
+reject_btn = "//button[normalize-space()='Reject']"
+driver.find_element_by_xpath(reject_btn).click()
+
+
+
+
+#action.send_keys('30000')
+#action.perform()
 
 # gas_limit_numeric_input_elements[0].send_keys("30000")
 
