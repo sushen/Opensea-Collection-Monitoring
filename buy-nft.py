@@ -123,6 +123,4 @@ for i in range(100):
         print("\nPrice or Time is greater than expectation, Trying again...")
         time.sleep(6)
 
-# TODO : Compare floor price to price and Make buy when floor price is lover than original price
-
-# TODO : Install extension
+# TODO : Run Only Buy Function When we find the NFT link
