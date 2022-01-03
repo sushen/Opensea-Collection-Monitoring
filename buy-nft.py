@@ -40,7 +40,7 @@ NFT_link = "https://opensea.io/activity?search[collections][0]=clonex&search[col
 login_link = "https://opensea.io/login?referrer=%2Faccount"
 
 # This is for Single Buy Button
-buy_xpath = "//button[normalize-sppace()='Buy Now']"
+buy_xpath = "//button[normalize-space()='Buy Now']"
 
 driver = webdriver.Chrome(r"../opensea/chromedriver.exe", chrome_options=chrome_options)
 
