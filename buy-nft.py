@@ -44,6 +44,10 @@ start_time = time.time()
 print("Script started at - " + time.ctime())
 
 for i in range(100):
+
+    loop_run_time = (time.time() - start_time)
+    print(f"This script was running for {loop_run_time}")
+
     driver.get(NFT_link)
     time.sleep(1)
     driver.implicitly_wait(10)
@@ -62,7 +66,7 @@ for i in range(100):
           f"NFT price : {nft_price}\n"
           f"NFT floor price : {nft_floor_price}\n")
 
-    if float(nft_floor_price) < float(nft_price):
+    if float(nft_floor_price) > float(nft_price):
         single_nft[-1].click()
         time.sleep(5)
 
