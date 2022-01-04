@@ -45,6 +45,8 @@ print("Script started at - " + time.ctime())
 
 for i in range(100):
 
+    # TODO : When we find place bit what we are going to do - link example https://opensea.io/assets/0xf9d53e156fe880889e777392585feb46d8d840f6/4745
+
     loop_run_time = (time.time() - start_time)
     print(f"This script was running for {loop_run_time}")
 
