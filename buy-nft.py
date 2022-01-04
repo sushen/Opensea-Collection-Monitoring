@@ -45,6 +45,9 @@ start_time = time.time()
 print("Script started at - " + time.ctime())
 
 for i in range(100):
+
+    # TODO : Excellent opportunity for storing nft link to database so later we can buy this NFT
+
     loop_run_time = (time.time() - start_time)
     print(f"This script was running for {loop_run_time}")
 
