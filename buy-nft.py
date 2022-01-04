@@ -72,6 +72,7 @@ for i in range(100):
     if float(nft_floor_price) > float(nft_price):
         single_nft[-1].click()
         time.sleep(5)
+        # TODO : Add sound
 
         try:
             driver.find_element_by_xpath(buy_button).click()
@@ -79,6 +80,8 @@ for i in range(100):
 
             driver.find_element_by_xpath(tos).click()
             driver.implicitly_wait(10)
+
+            # TODO: follow element finding pattern and make action
 
             driver.find_element_by_xpath(confirm_checkout).click()
             time.sleep(20)
