@@ -45,8 +45,13 @@ start_time = time.time()
 print("Script started at - " + time.ctime())
 
 for i in range(100):
+
+    # TODO : Excellent opportunity for storing nft link to database so later we can buy this NFT
+
     loop_run_time = (time.time() - start_time)
     print(f"This script was running for {loop_run_time}")
+
+    # TODO : print minute and hours also
 
     driver.get(NFT_link)
     time.sleep(1)
@@ -69,6 +74,7 @@ for i in range(100):
     if float(nft_floor_price) > float(nft_price):
         single_nft[-1].click()
         time.sleep(5)
+        # TODO : Add sound
 
         try:
             driver.find_element_by_xpath(buy_button).click()
@@ -76,6 +82,8 @@ for i in range(100):
 
             driver.find_element_by_xpath(tos).click()
             driver.implicitly_wait(10)
+
+            # TODO: follow element finding pattern and make action
 
             driver.find_element_by_xpath(confirm_checkout).click()
             time.sleep(20)
