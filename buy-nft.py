@@ -51,6 +51,8 @@ for i in range(100):
     loop_run_time = (time.time() - start_time)
     print(f"This script was running for {loop_run_time}")
 
+    # TODO : print minute and hours also
+
     driver.get(NFT_link)
     time.sleep(1)
     driver.implicitly_wait(10)
