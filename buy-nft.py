@@ -102,8 +102,12 @@ for i in range(100):
         time.sleep(10)
 
     else:
+
         print("No NFT found, Trying again....")
         time.sleep(5)
 
 total_run_time = (time.time() - start_time)
 print(f"This script was running for {total_run_time}")
+
+
+
