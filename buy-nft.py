@@ -5,6 +5,7 @@ import pathlib
 
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
+from selenium.common.exceptions import NoSuchElementException
 
 chrome_options = Options()
 scriptDirectory = pathlib.Path().absolute()
@@ -44,11 +45,6 @@ start_time = time.time()
 print("Script started at - " + time.ctime())
 
 for i in range(100):
-
-    # TODO : When we find place bit what we are going to do - link example
-    #  https://opensea.io/assets/0xf9d53e156fe880889e777392585feb46d8d840f6/4745
-
-    # TODO : Excellent opportunity for storing ndt link to database so later we can buy this NFT
     loop_run_time = (time.time() - start_time)
     print(f"This script was running for {loop_run_time}")
 
@@ -74,43 +70,47 @@ for i in range(100):
         single_nft[-1].click()
         time.sleep(5)
 
-        driver.find_element_by_xpath(buy_button).click()
-        driver.implicitly_wait(10)
+        try:
+            driver.find_element_by_xpath(buy_button).click()
+            driver.implicitly_wait(10)
 
-        driver.find_element_by_xpath(tos).click()
-        driver.implicitly_wait(10)
+            driver.find_element_by_xpath(tos).click()
+            driver.implicitly_wait(10)
 
-        driver.find_element_by_xpath(confirm_checkout).click()
-        time.sleep(20)
+            driver.find_element_by_xpath(confirm_checkout).click()
+            time.sleep(20)
 
-        window_before = driver.window_handles[0]
-        window_after = driver.window_handles[1]
-        driver.switch_to.window(window_after)
+            window_before = driver.window_handles[0]
+            window_after = driver.window_handles[1]
+            driver.switch_to.window(window_after)
 
-        driver.find_element_by_xpath(edit_transaction).click()
-        driver.implicitly_wait(10)
-        time.sleep(4)
-        driver.find_element_by_xpath(advanced_options).click()
+            driver.find_element_by_xpath(edit_transaction).click()
+            driver.implicitly_wait(10)
+            time.sleep(4)
+            driver.find_element_by_xpath(advanced_options).click()
 
-        gas_limit_numeric_input_elements = driver.find_elements_by_xpath(gas_limit_numeric_input)
-        gas_limit_numeric_input_elements[0].click()
-        action = ActionChains(driver)
-        action.key_down(Keys.CONTROL).send_keys("a").key_up(Keys.CONTROL) \
-            .send_keys(Keys.BACK_SPACE).send_keys(30000).perform()
-        gas_limit_numeric_input_elements[1].click()
-        action.key_down(Keys.CONTROL).send_keys("a").key_up(Keys.CONTROL) \
-            .send_keys(Keys.BACK_SPACE).send_keys(2).perform()
-        gas_limit_numeric_input_elements[2].click()
-        action.key_down(Keys.CONTROL).send_keys("a").key_up(Keys.CONTROL) \
-            .send_keys(Keys.BACK_SPACE).send_keys(100).perform()
-        driver.find_element_by_xpath(save_btn).click()
-        time.sleep(1)
-        driver.find_element_by_xpath(reject_btn).click()
-        driver.switch_to.window(window_before)
-        time.sleep(10)
+            gas_limit_numeric_input_elements = driver.find_elements_by_xpath(gas_limit_numeric_input)
+            gas_limit_numeric_input_elements[0].click()
+            action = ActionChains(driver)
+            action.key_down(Keys.CONTROL).send_keys("a").key_up(Keys.CONTROL) \
+                .send_keys(Keys.BACK_SPACE).send_keys(30000).perform()
+            gas_limit_numeric_input_elements[1].click()
+            action.key_down(Keys.CONTROL).send_keys("a").key_up(Keys.CONTROL) \
+                .send_keys(Keys.BACK_SPACE).send_keys(2).perform()
+            gas_limit_numeric_input_elements[2].click()
+            action.key_down(Keys.CONTROL).send_keys("a").key_up(Keys.CONTROL) \
+                .send_keys(Keys.BACK_SPACE).send_keys(100).perform()
+            driver.find_element_by_xpath(save_btn).click()
+            time.sleep(1)
+            driver.find_element_by_xpath(reject_btn).click()
+            driver.switch_to.window(window_before)
+            time.sleep(10)
+
+        except NoSuchElementException:
+            print("Place bid item, Skipping....")
+            time.sleep(5)
 
     else:
-
         print("No NFT found, Trying again....")
         time.sleep(5)
 
