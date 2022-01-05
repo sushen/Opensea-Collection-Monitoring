@@ -3,6 +3,8 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 import pathlib
 
+import winsound
+
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.common.exceptions import NoSuchElementException
@@ -38,6 +40,7 @@ advanced_options = '//button[@class="edit-gas-display__advanced-button"]'
 gas_limit_numeric_input = '//div[@class="numeric-input"]'
 save_btn = "//button[normalize-space()='Save']"
 reject_btn = "//button[normalize-space()='Reject']"
+place_bid = "//button[contains(text(),'Place bid')]"
 
 driver.get(login_link)
 print(input("Connect Metamask >>>>> "))
@@ -49,7 +52,8 @@ for i in range(100):
     # TODO : Excellent opportunity for storing nft link to database so later we can buy this NFT
 
     loop_run_time = (time.time() - start_time)
-    print(f"This script was running for {loop_run_time}")
+    print(f"Time elapsed since running - {loop_run_time // 3600} hour and"
+          f" {loop_run_time // 60} minutes ")
 
     # TODO : print minute and hours also
 
@@ -74,17 +78,13 @@ for i in range(100):
     if float(nft_floor_price) > float(nft_price):
         single_nft[-1].click()
         time.sleep(5)
-        # TODO : Add sound
+        winsound.PlaySound("alarm.wav", winsound.SND_ASYNC)
 
-        try:
-            driver.find_element_by_xpath(buy_button).click()
+        if driver.find_elements_by_xpath(buy_button):
+            driver.find_elements_by_xpath(buy_button)[0].click()
             driver.implicitly_wait(10)
-
             driver.find_element_by_xpath(tos).click()
             driver.implicitly_wait(10)
-
-            # TODO: follow element finding pattern and make action
-
             driver.find_element_by_xpath(confirm_checkout).click()
             time.sleep(20)
 
@@ -114,16 +114,17 @@ for i in range(100):
             driver.switch_to.window(window_before)
             time.sleep(10)
 
-        except NoSuchElementException:
-            print("Place bid item, Skipping....")
-            time.sleep(5)
+        elif driver.find_elements_by_xpath(place_bid):
+            print("Place bid item...")
+            time.sleep(10)
+
+        else:
+            print("Make offer option")
 
     else:
         print("No NFT found, Trying again....")
         time.sleep(5)
 
+
 total_run_time = (time.time() - start_time)
 print(f"This script was running for {total_run_time}")
-
-
-
