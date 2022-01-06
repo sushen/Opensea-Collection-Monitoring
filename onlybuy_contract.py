@@ -65,7 +65,6 @@ for i in range(100):
     driver.find_element_by_xpath(write_contract_x).click()
     driver.implicitly_wait(10)
     time.sleep(5)
-
     driver.switch_to.frame("writecontractiframe")
     time.sleep(5)
     driver.find_element_by_xpath(mint_x).click()
