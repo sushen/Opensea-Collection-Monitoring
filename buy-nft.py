@@ -47,15 +47,12 @@ print(input("Connect Metamask >>>>> "))
 start_time = time.time()
 print("Script started at - " + time.ctime())
 
-for i in range(100):
-
+for i in range(1000):
     # TODO : Excellent opportunity for storing nft link to database so later we can buy this NFT
 
     loop_run_time = (time.time() - start_time)
     print(f"Time elapsed since running - {loop_run_time // 3600} hour and"
           f" {loop_run_time // 60} minutes ")
-
-    # TODO : print minute and hours also
 
     driver.get(NFT_link)
     time.sleep(1)
@@ -77,8 +74,8 @@ for i in range(100):
 
     if float(nft_floor_price) > float(nft_price):
         single_nft[-1].click()
-        time.sleep(5)
         winsound.PlaySound("alarm.wav", winsound.SND_ASYNC)
+        time.sleep(5)
 
         if driver.find_elements_by_xpath(buy_button):
             driver.find_elements_by_xpath(buy_button)[0].click()
@@ -86,33 +83,37 @@ for i in range(100):
             driver.find_element_by_xpath(tos).click()
             driver.implicitly_wait(10)
             driver.find_element_by_xpath(confirm_checkout).click()
+            window_before = driver.window_handles[0]
             time.sleep(20)
 
-            window_before = driver.window_handles[0]
-            window_after = driver.window_handles[1]
-            driver.switch_to.window(window_after)
+            try:
+                window_after = driver.window_handles[1]
+                driver.switch_to.window(window_after)
+                driver.find_element_by_xpath(edit_transaction).click()
+                driver.implicitly_wait(10)
+                time.sleep(4)
+                driver.find_element_by_xpath(advanced_options).click()
 
-            driver.find_element_by_xpath(edit_transaction).click()
-            driver.implicitly_wait(10)
-            time.sleep(4)
-            driver.find_element_by_xpath(advanced_options).click()
+                gas_limit_numeric_input_elements = driver.find_elements_by_xpath(gas_limit_numeric_input)
+                gas_limit_numeric_input_elements[0].click()
+                action = ActionChains(driver)
+                action.key_down(Keys.CONTROL).send_keys("a").key_up(Keys.CONTROL) \
+                    .send_keys(Keys.BACK_SPACE).send_keys(30000).perform()
+                gas_limit_numeric_input_elements[1].click()
+                action.key_down(Keys.CONTROL).send_keys("a").key_up(Keys.CONTROL) \
+                    .send_keys(Keys.BACK_SPACE).send_keys(2).perform()
+                gas_limit_numeric_input_elements[2].click()
+                action.key_down(Keys.CONTROL).send_keys("a").key_up(Keys.CONTROL) \
+                    .send_keys(Keys.BACK_SPACE).send_keys(100).perform()
+                driver.find_element_by_xpath(save_btn).click()
+                time.sleep(1)
+                driver.find_element_by_xpath(reject_btn).click()
+                driver.switch_to.window(window_before)
+                time.sleep(10)
 
-            gas_limit_numeric_input_elements = driver.find_elements_by_xpath(gas_limit_numeric_input)
-            gas_limit_numeric_input_elements[0].click()
-            action = ActionChains(driver)
-            action.key_down(Keys.CONTROL).send_keys("a").key_up(Keys.CONTROL) \
-                .send_keys(Keys.BACK_SPACE).send_keys(30000).perform()
-            gas_limit_numeric_input_elements[1].click()
-            action.key_down(Keys.CONTROL).send_keys("a").key_up(Keys.CONTROL) \
-                .send_keys(Keys.BACK_SPACE).send_keys(2).perform()
-            gas_limit_numeric_input_elements[2].click()
-            action.key_down(Keys.CONTROL).send_keys("a").key_up(Keys.CONTROL) \
-                .send_keys(Keys.BACK_SPACE).send_keys(100).perform()
-            driver.find_element_by_xpath(save_btn).click()
-            time.sleep(1)
-            driver.find_element_by_xpath(reject_btn).click()
-            driver.switch_to.window(window_before)
-            time.sleep(10)
+            except IndexError:
+                print("Not enough ETH")
+                time.sleep(10)
 
         elif driver.find_elements_by_xpath(place_bid):
             print("Place bid item...")
@@ -123,8 +124,7 @@ for i in range(100):
 
     else:
         print("No NFT found, Trying again....")
-        time.sleep(5)
-
+        time.sleep(10)
 
 total_run_time = (time.time() - start_time)
 print(f"This script was running for {total_run_time}")
