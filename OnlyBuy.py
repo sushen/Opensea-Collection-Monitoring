@@ -24,7 +24,7 @@ chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"])
 chrome_options.add_argument("user-data-dir=chrome-data")
 chrome_options.add_argument(f"user-data-dir={scriptDirectory}\\userdata")
 
-driver = webdriver.Chrome(r"../opensea/chromedriver.exe", chrome_options=chrome_options)
+driver = webdriver.Chrome("/home/tawhid/Downloads/chromedriver/chromedriver", chrome_options=chrome_options)
 
 link = "https://opensea.io/assets/0xc926d9b50fffbe9bc6db02362cc15f5a5f3b23c2/1222?fbclid" \
        "=IwAR1P68BBsBijGhL6l2pCb6sa8snpirVccBzRXQFiLhh9e0A0ydgoHTydDQU "

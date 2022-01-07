@@ -19,7 +19,7 @@ chrome_options.add_experimental_option("useAutomationExtension", False)
 chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"])
 chrome_options.add_argument("user-data-dir=chrome-data")
 chrome_options.add_argument(f"user-data-dir={scriptDirectory}\\userdata")
-driver = webdriver.Chrome(r"../opensea/chromedriver.exe", chrome_options=chrome_options)
+driver = webdriver.Chrome("/home/tawhid/Downloads/chromedriver/chromedriver", chrome_options=chrome_options)
 
 # paths variables
 login_link = "https://opensea.io/login?referrer=%2Faccount"

@@ -2,8 +2,8 @@ import os
 
 
 class TestData:
-    CHROME_EXECUTABLE_PATH = "../chromedriver.exe"
-    FIREFOX_EXECUTABLE_PATH = "../geckodriver.exe"
+    CHROME_EXECUTABLE_PATH = "/home/tawhid/Downloads/chromedriver/chromedriver"
+    # FIREFOX_EXECUTABLE_PATH = "../geckodriver.exe"
     BASE_URL = "https://opensea.io"
 
     # USER_NAME = os.environ.get('facebook_zrliqi_email')
