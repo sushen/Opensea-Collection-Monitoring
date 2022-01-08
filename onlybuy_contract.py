@@ -52,6 +52,7 @@ for i in range(100):
     driver.find_element_by_xpath(details_x).click()
     time.sleep(1)
     driver.find_element_by_xpath(contract_address_x).click()
+    # TODO : this place have some bugs
 
     time.sleep(5)
     window_before = driver.window_handles[0]
