@@ -45,22 +45,22 @@ for i in range(1000):
         nft_click[-1].click()
         # buy_page.test_buy_button()
         # TODO : Start The repeat loop and Continue...
-        print(input("loading nft : "))
+        # print(input("loading nft : "))
 
         buy_page.driver.find_element_by_xpath(buy_button).click()
 
-        print(input("loading nft : "))
+        # print(input("loading nft : "))
 
     else:
-        print(input("Nft Price is Big : "))
+        # print(input("Nft Price is Big : "))
         nft_click = buy_page.driver.find_elements_by_xpath(nft_click_xpath)
         nft_click[-1].click()
         # buy_page.test_buy_button()
         # TODO : Start The repeat loop and Continue...
-        print(input("loading nft : "))
+        # print(input("loading nft : "))
 
         buy_page.driver.find_element_by_xpath(buy_button).click()
 
-        print(input("loading nft : "))
+        # print(input("loading nft : "))
 
 
