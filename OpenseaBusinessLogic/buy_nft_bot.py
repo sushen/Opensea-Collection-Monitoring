@@ -22,7 +22,7 @@ buy_page = BotBuyPage()
 
 
 def conform_perches(driver):
-    print(input("conform :"))
+    # print(input("conform :"))
 
     buy_button = "//button[contains(text(),'Buy now')]"
     driver.find_element_by_xpath(buy_button).click()
@@ -45,7 +45,7 @@ def conform_perches(driver):
 
 
 def conform_metamask(driver):
-    print(input("metamask :"))
+    # print(input("metamask :"))
 
     window_before = driver.window_handles[0]
     print(driver.title)
@@ -108,7 +108,6 @@ def conform_metamask(driver):
     driver.switch_to.window(window_before)
 
 
-
 buy_page.driver.get("https://opensea.io/")
 print(input("Connect metamask:"))
 
@@ -116,7 +115,7 @@ for i in range(1000):
     buy_page.driver.get(ACTIVITY_URL)
     buy_page.driver.implicitly_wait(10)
     time.sleep(4)
-    # print(input("Wating to load nft, this will be excluded later >>>> "))
+    # print(input("Waiting to load nft, this will be excluded later >>>> "))
 
     nft_names = buy_page.driver.find_elements_by_xpath(nft_names_xpath)
     nft_name = nft_names[-1].text
@@ -131,7 +130,7 @@ for i in range(1000):
           f"NFT price in eth : {nft_eth_price} \n"
           f"NFT floor price : {nft_floor_price} \n")
 
-    if float(nft_floor_price) < float(nft_eth_price):
+    if float(nft_floor_price) > float(nft_eth_price):
         nft_click = buy_page.driver.find_elements_by_xpath(nft_click_xpath)
         nft_click[-1].click()
         # buy_page.test_buy_button()
@@ -140,6 +139,8 @@ for i in range(1000):
         conform_perches(buy_page.driver)
 
         conform_metamask(buy_page.driver)
+
+print(input("End Script:"))
 
 
 
