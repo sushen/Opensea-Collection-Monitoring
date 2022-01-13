@@ -2,6 +2,8 @@
 import time
 from Bots.bot_ActivityPage import BotActivityPage
 from Bots.bot_BuyPage import BotBuyPage
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.keys import Keys
 
 # xpath variables
 nft_eth_price_xpath = "//div[@class='Overflowreact__OverflowContainer-sc-10mm0lu-0 gjwKJf Price--amount']"
@@ -20,7 +22,7 @@ buy_page = BotBuyPage()
 
 
 def conform_perches(driver):
-    print(input(" :"))
+    print(input("conform :"))
 
     buy_button = "//button[contains(text(),'Buy now')]"
     driver.find_element_by_xpath(buy_button).click()
@@ -43,7 +45,7 @@ def conform_perches(driver):
 
 
 def conform_metamask(driver):
-    print(input(" :"))
+    print(input("metamask :"))
 
     window_before = driver.window_handles[0]
     print(driver.title)
