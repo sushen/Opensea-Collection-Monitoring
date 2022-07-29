@@ -26,8 +26,7 @@ chrome_options.add_argument(f"user-data-dir={scriptDirectory}\\userdata")
 
 driver = webdriver.Chrome(r"../opensea/chromedriver.exe", chrome_options=chrome_options)
 
-link = "https://opensea.io/assets/0xc926d9b50fffbe9bc6db02362cc15f5a5f3b23c2/1222?fbclid" \
-       "=IwAR1P68BBsBijGhL6l2pCb6sa8snpirVccBzRXQFiLhh9e0A0ydgoHTydDQU "
+link = "https://opensea.io/assets/ethereum/0x12b180b635dd9f07a78736fb4e43438fcdb41555/2112"
 
 
 def buy_single_nft(nft_link):
