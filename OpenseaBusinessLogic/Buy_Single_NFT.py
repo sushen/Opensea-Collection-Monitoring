@@ -32,9 +32,9 @@ def click_print_element(wallet_xpath):
 
 
 def conform_perches(driver):
-    click_print_element("//button[contains(text(),'Buy now')]")
+    # click_print_element("//button[contains(text(),'Buy now')]")
     # buy_page.driver.find_element_by_xpath("//button[contains(text(),'Buy now')]").click()
-    buy_page.driver.find_element_by_xpath("//button[contains(text(),'Buy now')]").click()
+    driver.find_element_by_xpath("//button[contains(text(),'Buy now')]").click()
     print(input("Go for Unreviewed :"))
 
     driver.implicitly_wait(10)
