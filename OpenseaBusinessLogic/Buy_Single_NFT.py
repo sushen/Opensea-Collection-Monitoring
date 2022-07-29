@@ -1,4 +1,5 @@
 # TODO : Go to Base Website - https://opensea.io/
+import os
 import time
 from Bots.bot_ActivityPage import BotActivityPage
 from Bots.bot_BuyPage import BotBuyPage
@@ -17,6 +18,7 @@ ACTIVITY_URL = "https://opensea.io/activity?search[collections][0]=clonex&search
 buy_button = "//button[contains(text(),'Buy now')]"
 tos_button = "//input[@id='tos']"
 
+metamask_password = os.environ.get('metamask_password')
 
 buy_page = BotBuyPage()
 
@@ -114,6 +116,7 @@ buy_page.driver.get("https://opensea.io/")
 def click_print_element(wallet_xpath):
     print(f"inside {wallet_xpath}")
     # wallet_xpath = "//span[normalize-space()='MetaMask']"
+    buy_page.driver.implicitly_wait(10)
     wallet = buy_page.driver.find_element_by_xpath(wallet_xpath)
     print(wallet)
     wallet.click()
@@ -126,11 +129,11 @@ def connect_font_page_metamask(wallet_xpath):
 def download_metamask(wallet_xpath):
     click_print_element(wallet_xpath)
 
-    time.sleep(4)
+    # time.sleep(4)
     w_h = buy_page.driver.window_handles
 
-    print(len(w_h))
-    print(w_h)
+    # print(len(w_h))
+    # print(w_h)
 
     if len(w_h) > 1:
         print(input("Downloader and Install Metamask \nRestart The Program again:"))
@@ -139,11 +142,46 @@ def download_metamask(wallet_xpath):
         pass
 
 
+def enter_metamask(wallet_xpath):
+    click_print_element(wallet_xpath)
+
+    time.sleep(4)
+    w_h = buy_page.driver.window_handles
+
+    print(len(w_h))
+    print(w_h)
+
+    if len(w_h) > 1:
+        window_before = buy_page.driver.window_handles[0]
+        window_after = buy_page.driver.window_handles[1]
+        buy_page.driver.switch_to.window(window_after)
+        window_after_title = buy_page.driver.title
+        print(window_after_title)
+        click_print_element("//input[@class='MuiInputBase-input MuiInput-input']")
+        buy_page.driver.find_element_by_xpath("//input[@class='MuiInputBase-input MuiInput-input']").send_keys(metamask_password)
+        click_print_element("//button[@class='button btn--rounded btn-default']")
+        time.sleep(10)
+        # print(input("Metamask Password:"))
+
+        w_h = buy_page.driver.window_handles
+        print(len(w_h))
+        print(w_h)
+
+        if len(w_h) > 1:
+            click_print_element("//button[@class='button btn--rounded btn-primary']")
+            click_print_element("//button[@class='button btn--rounded btn-primary page-container__footer-button']")
+            buy_page.driver.switch_to.window(window_before)
+            print(window_after_title)
+        else:
+            pass
+        buy_page.driver.switch_to.window(window_before)
+
+
 def connect_metamask_first_time():
-    print("inside")
+    print("inside connect_metamask_first_time")
     buy_page.driver.refresh()
     connect_font_page_metamask("//i[@title='Wallet']")
-    download_metamask("//span[normalize-space()='MetaMask']")
+    enter_metamask("//span[normalize-space()='MetaMask']")
 
 
 connect_font_page_metamask("//i[@title='Wallet']")
