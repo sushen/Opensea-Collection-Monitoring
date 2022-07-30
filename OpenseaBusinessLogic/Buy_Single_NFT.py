@@ -7,34 +7,28 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
 from MetamaskConnection import MetaMask
 
-# xpath variables
-nft_eth_price_xpath = "//div[@class='Overflowreact__OverflowContainer-sc-10mm0lu-0 gjwKJf Price--amount']"
-nft_names_xpath = "//div[@role='listitem']//child::div[@class='AssetCell--container']"
-floor_prices_xpath = "//a[@class='chakra-link css-166ifkv']"
-nft_click_xpath = "//a[@class='styles__StyledLink-sc-l6elh8-0 ekTmzq styles__CoverLink-sc-nz4knd-1 givILt']"
-ACTIVITY_URL = "https://opensea.io/activity?search[collections][0]=clonex&search[collections][" \
-               "1]=boredapeyachtclub&search[collections][2]=dinobabies&search[collections][3]=coolmans-universe&search[" \
-               "eventTypes][0]=AUCTION_CREATED "
-
-buy_button = "//button[contains(text(),'Buy now')]"
-tos_button = "//input[@id='tos']"
 
 buy_page = BotBuyPage()
 
 
 def click_print_element(wallet_xpath):
     print(f"inside {wallet_xpath}")
-    # wallet_xpath = "//span[normalize-space()='MetaMask']"
     buy_page.driver.implicitly_wait(10)
-    wallet = buy_page.driver.find_element_by_xpath(wallet_xpath)
+    # time.sleep(.1)
+    wallet = buy_page.driver.find_elements_by_xpath(wallet_xpath)
+    # print(input("Next.."))
+    ActionChains(buy_page.driver).move_to_element(wallet[0])
+    print(len(wallet))
     print(wallet)
-    wallet.click()
+    print(input("Next.."))
+    wallet[0].click()
 
 
 def conform_perches(driver):
-    click_print_element("//button[contains(text(),'Buy now')]")
+    # click_print_element("//button[contains(text(),'Buy now')]")
+    # click_print_element("//button[@class='sc-1xf18x6-0 sc-glfma3-0 jPlHEK ldKPky']")
     # buy_page.driver.find_element_by_xpath("//button[contains(text(),'Buy now')]").click()
-    buy_page.driver.find_element_by_xpath("//button[contains(text(),'Buy now')]").click()
+    # buy_page.driver.find_element_by_xpath("//button[contains(text(),'Buy now')]").click()
     print(input("Go for Unreviewed :"))
 
     driver.implicitly_wait(10)
@@ -125,9 +119,11 @@ mm.download_metamask("//span[normalize-space()='MetaMask']", buy_page.driver)
 mm.connect_metamask_first_time(buy_page.driver)
 
 buy_page.driver.get(
-    "https://opensea.io/assets/matic/0x2953399124f0cbb46d2cbacd8a89cf0599974963/31097931735536228284032699637255406190173055095304977551590049585738280861946/")
+    "https://opensea.io/assets/ethereum/0x495f947276749ce646f68ac8c248420045cb7b5e/881756771131205292479386972198912303276944630623864784050108750075382464513")
 
 conform_perches(buy_page.driver)
+
+# buy_page.driver.get("https://opensea.io/collection/thepotatoz?search[sortAscending]=true&search[sortBy]=UNIT_PRICE&search[stringTraits][0][name]=property&search[stringTraits][0][values][0]=Zombie")
 
 # time.sleep(5)
 # buy_page.driver.quit()

@@ -5,7 +5,7 @@ from selenium.webdriver.common.by import By
 class BuyPage(BasePage):
     buy_button = (By.XPATH, "//button[contains(text(),'Buy now')]")
     accept_button = (By.XPATH, "//input[@id='tos']")
-    example_nft_url = "https://opensea.io/assets/0x49cf6f5d44e70224e2e23fdcdd2c053f30ada28b/11912"
+    example_nft_url = "https://opensea.io/assets/ethereum/0x495f947276749ce646f68ac8c248420045cb7b5e/881756771131205292479386972198912303276944630623864784050108750075382464513"
 
     def __init__(self, driver):
         super().__init__(driver)

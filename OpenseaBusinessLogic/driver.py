@@ -18,12 +18,6 @@ chrome_options.add_argument("user-data-dir=chrome-data")
 chrome_options.add_argument(f"user-data-dir={scriptDirectory}\\userdata")
 
 
-class BaseBot:
-    def __init__(self):
-        # self.driver = webdriver.Chrome("../chromedriver.exe", chrome_options=chrome_options)
-        self.driver = webdriver.Chrome(chromedriver_autoinstaller.install(), chrome_options=chrome_options)
-        # self.driver = chromedriver_autoinstaller.install()
-
-
-
-
+class Driver:
+    print("driver")
+    driver = webdriver.Chrome("../chromedriver.exe", chrome_options=chrome_options)

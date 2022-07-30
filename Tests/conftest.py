@@ -1,6 +1,7 @@
 import pytest
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
+import chromedriver_autoinstaller
 
 from Config.config import TestData
 
@@ -28,10 +29,13 @@ chrome_options.add_argument(f"user-data-dir={scriptDirectory}\\userdata")
 def init_driver(request):
     if request.param == "chrome":
         # web_driver = webdriver.Chrome(executable_path=TestData.CHROME_EXECUTABLE_PATH)
-        web_driver = webdriver.Chrome(ChromeDriverManager().install())
+        # web_driver = webdriver.Chrome(executable_path=TestData.CHROME_EXECUTABLE_PATH, chrome_options=chrome_options)
+        # web_driver = webdriver.Chrome(executable_path="../chromedriver.exe", chrome_options=chrome_options)
+        # web_driver = webdriver.Chrome(ChromeDriverManager().install())
+        web_driver = webdriver.Chrome(chromedriver_autoinstaller.install(), chrome_options=chrome_options)
     if request.param == "firefox":
         web_driver = webdriver.Chrome(executable_path=TestData.FIREFOX_EXECUTABLE_PATH)
-    request.cls.driver = web_driver
+    request.cls.Driver = web_driver
     # 3 We cannot close browser so we comment it
     yield
     web_driver.close()

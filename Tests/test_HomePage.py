@@ -1,3 +1,8 @@
+"""
+Commend run in terminal
+pytest Tests/test_HomePage.py
+python -m pytest
+"""
 from Config.config import TestData
 from Pages.HomePage import HomePage
 from Tests.test_BasePage import BaseTest
