@@ -3,7 +3,7 @@ Commend run in terminal
 pytest Tests/test_BuyPage.py
 python -m pytest
 """
-from OpenseaBusinessLogic.MetamaskConnection import MetaMask
+from MetaMask.MetamaskConnection import MetaMask
 from Tests.test_BasePage import BaseTest
 
 from Pages.BuyPage import BuyPage

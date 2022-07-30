@@ -19,5 +19,5 @@ chrome_options.add_argument(f"user-data-dir={scriptDirectory}\\userdata")
 
 
 class Driver:
-    print("driver")
+    print("Calling Selenium Driver")
     driver = webdriver.Chrome("../chromedriver.exe", chrome_options=chrome_options)

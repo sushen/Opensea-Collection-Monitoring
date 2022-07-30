@@ -6,3 +6,4 @@
 /chrome-data/
 /.pytest_cache/
 /OpenseaBusinessLogic/userdata/
+/MetaMask/acc_info.py

@@ -16,7 +16,6 @@ class BasePage:
     def __init__(self, driver):
         self.driver = driver
 
-
     def do_click(self, by_locator):
         WebDriverWait(self.driver, wait_time).until(EC.visibility_of_element_located(by_locator)).click()
 
@@ -41,7 +40,7 @@ class BasePage:
         return self.driver.title
 
     def new_window(self, by_locator):
-        WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(by_locator))
+        WebDriverWait(self.driver, wait_time).until(EC.visibility_of_element_located(by_locator))
         action = ActionChains(self.driver)
         action.send_keys(Keys.TAB).perform()
         new_TAB = ActionChains(self.driver)
@@ -50,6 +49,12 @@ class BasePage:
         self.driver.switch_to.window(after)
         time.sleep(5)
         self.driver.close()
+
+    def new_browder_tab(self, by_url):
+        self.driver.switch_to.new_window()
+        after = self.driver.window_handles[1]
+        self.driver.switch_to.window(after)
+        self.driver.get(by_url)
 
     def close_popup(self):
         Action = ActionChains(self.driver)

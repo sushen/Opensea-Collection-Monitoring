@@ -60,6 +60,20 @@ class MetaMask:
             print(w_h)
 
             if len(w_h) > 1:
+                # self.click_print_element("//button[@class='button btn--rounded btn-primary']", driver)
+                self.click_print_element(
+                    "//button[@class='button btn--rounded btn-secondary page-container__footer-button']", driver)
+                driver.switch_to.window(window_before)
+                print(window_after_title)
+            else:
+                pass
+
+            time.sleep(4)
+            w_h = driver.window_handles
+            print(len(w_h))
+            print(w_h)
+
+            if len(w_h) > 1:
                 self.click_print_element("//button[@class='button btn--rounded btn-primary']", driver)
                 self.click_print_element(
                     "//button[@class='button btn--rounded btn-primary page-container__footer-button']", driver)
