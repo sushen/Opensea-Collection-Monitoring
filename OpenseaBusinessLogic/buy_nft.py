@@ -9,6 +9,8 @@ from Pages.BasePage import BasePage
 # url = "https://opensea.io/assets/matic/0x2953399124f0cbb46d2cbacd8a89cf0599974963/31097931735536228284032699637255406190173055095304977551590049585738280861946/"
 url = "https://opensea.io/assets/ethereum/0x0b3b95547a22bee3c03be558ec649dbd69af8476/3307"
 
+extension_url = "chrome-extension://nkbihfbeogaeaoehlefnkodbefgpgknn/home.html"
+
 
 class BuyNft(BasePage):
 
@@ -31,10 +33,18 @@ dr.driver.get(url)
 dr.driver.refresh()
 buy_nft.do_click((By.XPATH, "//button[contains(text(),'Buy now')]"))
 buy_nft.do_click((By.XPATH, "//span[normalize-space()='Complete purchase']"))
+# buy_nft.driver.switch_to.new_window()
+buy_nft.new_browder_tab(extension_url)
+# dr.driver.get(extension_url)
 
-buy_nft.new_browder_tab("chrome-extension://nkbihfbeogaeaoehlefnkodbefgpgknn/home.html")
+w_h = dr.driver.window_handles
+
+print(len(w_h))
+print(w_h)
 
 print(input(".."))
+# buy_nft.new_browder_tab()
+
 
 buy_nft.do_click((By.XPATH, "//button[normalize-space()='Continue']"))
 buy_nft.do_click((By.XPATH, "//input[@id='review-confirmation']"))

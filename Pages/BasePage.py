@@ -51,6 +51,7 @@ class BasePage:
         self.driver.close()
 
     def new_browder_tab(self, by_url):
+        # Interesting Function
         self.driver.switch_to.new_window()
         after = self.driver.window_handles[1]
         self.driver.switch_to.window(after)
