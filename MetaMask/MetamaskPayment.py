@@ -37,6 +37,8 @@ tx = {
 
 signe_tx = web3.eth.account.signTransaction(tx, private_key)
 
+print(input("For Complete Transaction Press Enter:"))
+
 tx_transaction = web3.eth.sendRawTransaction(signe_tx.rawTransaction)
 
 print("Transaction Complete")
