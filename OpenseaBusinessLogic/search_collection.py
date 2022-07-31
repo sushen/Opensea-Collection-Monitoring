@@ -31,7 +31,7 @@ dr.driver.get(collection_url)
 
 sc = SearchCollection(dr.driver)
 
-buying_floor_price = 1.26
+buying_floor_price = 1.35
 for i in range(10):
     print(f"Current Floor Price :{sc.find_floor_price()}")
     if float(sc.find_floor_price()) <= buying_floor_price:

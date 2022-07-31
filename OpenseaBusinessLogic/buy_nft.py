@@ -8,7 +8,8 @@ from Pages.BasePage import BasePage
 
 # url = "https://opensea.io/assets/ethereum/0x495f947276749ce646f68ac8c248420045cb7b5e/881756771131205292479386972198912303276944630623864784050108750075382464513"
 # url = "https://opensea.io/assets/matic/0x2953399124f0cbb46d2cbacd8a89cf0599974963/31097931735536228284032699637255406190173055095304977551590049585738280861946/"
-url = "https://opensea.io/assets/ethereum/0x0b3b95547a22bee3c03be558ec649dbd69af8476/3307"
+# url = "https://opensea.io/assets/ethereum/0x0b3b95547a22bee3c03be558ec649dbd69af8476/3307"
+url = "https://opensea.io/assets/ethereum/0x742fbe84557a978c8c06af20375a17bd2031f036/9030"
 
 extension_url = "chrome-extension://nkbihfbeogaeaoehlefnkodbefgpgknn/home.html"
 
@@ -54,8 +55,4 @@ w_h = dr.driver.window_handles
 print(len(w_h))
 print(w_h)
 
-print(input(".."))
 
-
-buy_nft.do_click((By.XPATH, "//button[normalize-space()='Continue']"))
-buy_nft.do_click((By.XPATH, "//input[@id='review-confirmation']"))
