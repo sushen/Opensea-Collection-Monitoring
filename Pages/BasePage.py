@@ -27,8 +27,13 @@ class BasePage:
     def do_send_keys(self, by_locator, text):
         WebDriverWait(self.driver, wait_time).until(EC.visibility_of_element_located(by_locator)).send_keys(text)
 
+    def do_select_keys(self):
+        action = ActionChains(self.driver)
+        action.key_down(Keys.CONTROL).send_keys('a').key_up(Keys.CONTROL).perform()
+
     def get_element_text(self, by_locator):
         element = WebDriverWait(self.driver, wait_time).until(EC.visibility_of_element_located(by_locator))
+        print(element.text)
         return element.text
 
     def is_visible(self, by_locator):

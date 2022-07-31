@@ -2,6 +2,7 @@ import time
 
 import pyautogui as pyautogui
 from selenium.webdriver.common.by import By
+
 from Pages.BasePage import BasePage
 
 
@@ -42,8 +43,18 @@ w_h = dr.driver.window_handles
 print(len(w_h))
 print(w_h)
 
+from MetaMask.MetamaskBody import MetamaskBody
+mmb = MetamaskBody(dr.driver)
+mmb.fulfill_basic_order()
+dr.driver.close()
+dr.driver.switch_to.window(dr.driver.window_handles[0])
+
+w_h = dr.driver.window_handles
+
+print(len(w_h))
+print(w_h)
+
 print(input(".."))
-# buy_nft.new_browder_tab()
 
 
 buy_nft.do_click((By.XPATH, "//button[normalize-space()='Continue']"))
