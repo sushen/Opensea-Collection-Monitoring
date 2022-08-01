@@ -19,8 +19,9 @@ class MetamaskBody(BasePage):
         self.do_click((By.XPATH, "//button[@class='button btn--rounded btn-primary']"))
 
         # Buy Rela NFT
-        self.do_click((By.XPATH, "//button[contains(text(),'Confirm')]"))
-        # self.do_click((By.XPATH, "//button[@class='button btn--rounded btn-secondary page-container__footer-button']"))
+        print(input("Process Payment"))
+        # self.do_click((By.XPATH, "//button[contains(text(),'Confirm')]"))
+        self.do_click((By.XPATH, "//button[@class='button btn--rounded btn-secondary page-container__footer-button']"))
 
         print("Order Conformed")
 

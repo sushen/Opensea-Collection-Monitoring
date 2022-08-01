@@ -35,9 +35,9 @@ dr.driver.get(url)
 dr.driver.refresh()
 buy_nft.do_click((By.XPATH, "//button[contains(text(),'Buy now')]"))
 buy_nft.do_click((By.XPATH, "//span[normalize-space()='Complete purchase']"))
-# buy_nft.driver.switch_to.new_window()
+
 buy_nft.new_browder_tab(extension_url)
-# dr.driver.get(extension_url)
+
 
 w_h = dr.driver.window_handles
 
