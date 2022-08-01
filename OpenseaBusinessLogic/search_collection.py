@@ -52,15 +52,16 @@ for i in range(100):
 
         from email_option.sending_mail import MailSender
         from email_option.ip_address import IpAddress
+        from email_option import mac_address
         sender1 = MailSender()
         sender1.login()
-        sender1.send_mail(email_paramiter.gmail, f"Open Sea Collection Purchase Successful : IP {IpAddress().ip_address()}", f"We buy :{float(sc.find_floor_price())} eth")
-
-
+        sender1.send_mail(email_paramiter.gmail, f"Open Sea Collection Purchase Successful : IP {IpAddress().ip_address()} and MAC:{mac_address.mac_address}", f"We buy :{float(sc.find_floor_price())} eth")
         break
+
     else:
         print(f"Current Floor Price :{sc.find_floor_price()} Searching Below {buying_floor_price}")
         dr.driver.refresh()
+
     time.sleep(2)
 
 

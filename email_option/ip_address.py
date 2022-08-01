@@ -15,4 +15,4 @@ class IpAddress:
             print("you dont have internet connection")
 
 
-IpAddress().ip_address()
+# IpAddress().ip_address()
