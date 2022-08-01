@@ -3,6 +3,7 @@ from selenium.webdriver.common.by import By
 from OpenseaBusinessLogic.driver import Driver
 from Pages.BasePage import BasePage
 
+
 extension_url = "chrome-extension://nkbihfbeogaeaoehlefnkodbefgpgknn/home.html"
 collection_url = "https://opensea.io/collection/thepotatoz"
 
@@ -31,8 +32,9 @@ dr.driver.get(collection_url)
 
 sc = SearchCollection(dr.driver)
 
-buying_floor_price = 1.35
-for i in range(10):
+buying_floor_price = 1.29
+
+for i in range(100):
     print(f"Current Floor Price :{sc.find_floor_price()}")
     if float(sc.find_floor_price()) <= buying_floor_price:
         sc.select_nft()
@@ -41,16 +43,25 @@ for i in range(10):
         sc.new_browder_tab(extension_url)
 
         from MetaMask.MetamaskBody import MetamaskBody
+        from email_option import email_paramiter
 
         mmb = MetamaskBody(dr.driver)
         mmb.fulfill_basic_order()
         dr.driver.close()
         dr.driver.switch_to.window(dr.driver.window_handles[0])
+
+        from email_option.sending_mail import MailSender
+        from email_option.ip_address import IpAddress
+        sender1 = MailSender()
+        sender1.login()
+        sender1.send_mail(email_paramiter.gmail, f"Open Sea Collection Purchase Successful : IP {IpAddress().ip_address()}", f"We buy :{float(sc.find_floor_price())} eth")
+
+
         break
     else:
         print(f"Current Floor Price :{sc.find_floor_price()} Searching Below {buying_floor_price}")
         dr.driver.refresh()
-    time.sleep(4)
+    time.sleep(2)
 
 
 

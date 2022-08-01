@@ -52,7 +52,7 @@ class MetaMask:
             driver.find_element_by_xpath("//input[@class='MuiInputBase-input MuiInput-input']").send_keys(
                 metamask_password)
             self.click_print_element("//button[@class='button btn--rounded btn-default']", driver)
-            time.sleep(10)
+            time.sleep(15)
             # print(input("Metamask Password:"))
 
             w_h = driver.window_handles
@@ -68,7 +68,7 @@ class MetaMask:
             else:
                 pass
 
-            time.sleep(4)
+            time.sleep(10)
             w_h = driver.window_handles
             print(len(w_h))
             print(w_h)
